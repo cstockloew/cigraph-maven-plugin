@@ -68,7 +68,7 @@ public class Executor {
 		writer.append("Content-Type: " + URLConnection.guessContentTypeFromName("test.png")).append(CRLF);
 		writer.append("Content-Transfer-Encoding: binary").append(CRLF);
 		writer.append(CRLF).flush();
-		ChartUtilities.writeChartAsPNG(output, chart, 400, 300);
+		ChartUtilities.writeChartAsPNG(output, chart, 330, 250);
 		// Files.copy(binaryFile.toPath(), output);
 		output.flush(); // Important before continuing with writer!
 		writer.append(CRLF).flush(); // CRLF is important! It indicates end
