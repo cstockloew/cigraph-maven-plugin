@@ -12,6 +12,7 @@ public class PMDParser extends XMLParser {
 		fXmlFile = new File("target", "pmd.xml");
 	}
 
+	@Override
 	protected void parse(Document doc) {
 		values = new int[3];
 

@@ -1,7 +1,6 @@
 package org.universAAL.support.cigraph.exe;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -14,7 +13,6 @@ import java.net.URLConnection;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.universAAL.support.cigraph.mojos.CiGraph;
 import org.universAAL.support.cigraph.parser.Parser;
 import org.universAAL.support.cigraph.util.CategoryGroup;
 import org.universAAL.support.cigraph.util.Chart;
@@ -33,13 +31,17 @@ public class Executor {
 	protected boolean legend = true;
 	private String baseURL = "http://depot.universaal.org/ci/";
 	int colMod = 0;
+	boolean isPercent = false;
 
 	protected Executor(String[] cg) {
 		g = new CategoryGroup(cg);
 	}
 
 	public void execute() throws IOException {
-		parser.parse();
+		if (!parser.parse()) {
+			System.out.println("Parser return false, no values are uploaded (" + this.getClass().getSimpleName() + ")");
+			return;
+		}
 		uploadNewValues(parser.getValues());
 		String values = downloadValues();
 		createDataset(values);
@@ -157,7 +159,7 @@ public class Executor {
 	}
 
 	private void createChart() throws IOException {
-		chart = Chart.createChart(title, dataset, lblDomain, lblRange, legend, colMod);
+		chart = Chart.createChart(title, dataset, lblDomain, lblRange, legend, colMod, isPercent);
 		// CiGraph.log("writing chart as file");
 		// ChartUtilities.saveChartAsPNG(new File("output.png"), chart, 400,
 		// 300);

@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
 public abstract class XMLParser extends Parser {
 	protected File fXmlFile;
 
-	public void parse() {
+	public boolean parse() {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			dbFactory.setValidating(false);
@@ -37,12 +37,14 @@ public abstract class XMLParser extends Parser {
 			doc.getDocumentElement().normalize();
 
 			parse(doc);
+			return true;
 		} catch (java.io.FileNotFoundException e) {
 			// ignore, this happens for FindBugsParser for parent poms which
 			// don't have a findbugs report
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	protected abstract void parse(Document doc);

@@ -16,7 +16,7 @@ import org.jfree.data.category.CategoryDataset;
 public class Chart {
 
 	public static JFreeChart createChart(String title, CategoryDataset dataset, String lblDomain, String lblRange,
-			boolean legend, int colMod) {
+			boolean legend, int colMod, boolean isPercent) {
 		JFreeChart chart = ChartFactory.createStackedAreaChart(title, // title
 				lblDomain, // domain axis label
 				lblRange, // range axis label
@@ -40,6 +40,8 @@ public class Chart {
 		// change the auto tick unit selection to integer units only...
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+		if (isPercent)
+			rangeAxis.setRange(0, 100);
 
 		final CategoryItemRenderer renderer = plot.getRenderer();
 		renderer.setBaseItemLabelsVisible(true);

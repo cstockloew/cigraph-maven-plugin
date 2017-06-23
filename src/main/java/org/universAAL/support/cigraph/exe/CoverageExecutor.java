@@ -12,5 +12,6 @@ public class CoverageExecutor extends Executor {
 		lblRange = "Percent";
 		legend = false;
 		colMod = 2;
+		isPercent = true;
 	}
 }

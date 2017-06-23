@@ -11,16 +11,19 @@ import org.w3c.dom.Document;
 public class FindBugsParser extends XMLParser {
 
 	@Override
-	public void parse() {
+	public boolean parse() {
 		values = new int[3];
 		ModuleTraverser mt = new ModuleTraverser();
 		mt.findAllModules(Data.project);
 		List<File> paths = mt.getPaths();
+		boolean parsed = false;
 		for (File f : paths) {
 			fXmlFile = new File(new File(f, "target"), "findbugsXml.xml");
-			super.parse();
+			if (super.parse())
+				parsed = true;
 		}
 		CiGraph.log(" -- results FindBugsParser: " + values[0] + "  " + values[1] + "  " + values[2]);
+		return parsed;
 	}
 
 	@Override

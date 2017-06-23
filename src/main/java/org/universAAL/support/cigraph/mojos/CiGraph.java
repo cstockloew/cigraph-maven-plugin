@@ -46,6 +46,14 @@ public class CiGraph extends AbstractMojo {
 	 * @readonly
 	 */
 	private String token;
+	
+	/**
+	 * Skip surefire.
+	 * 
+     * @parameter property=skipSurefire default-value="false"
+	 * @readonly
+	 */
+	private boolean skipSurefire;
 
 	/** {@inheritDoc} */
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -53,13 +61,18 @@ public class CiGraph extends AbstractMojo {
 		Data.token = token;
 		log = getLog();
 
+		//System.out.println(skipSurefire);
+		
 		List<Executor> lst = new ArrayList<Executor>();
 		lst.add(new CheckstyleExecutor());
 		lst.add(new CoverageExecutor());
 		lst.add(new CPDExecutor());
 		lst.add(new FindBugsExecutor());
 		lst.add(new PMDExecutor());
-		lst.add(new SurefireExecutor());
+		if (!skipSurefire)
+			lst.add(new SurefireExecutor());
+		else
+			System.out.println("skipping surefire");
 		lst.add(new TaglistExecutor());
 		for (Executor exe : lst) {
 			try {

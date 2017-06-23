@@ -13,7 +13,7 @@ import org.universAAL.support.cigraph.util.ModuleTraverser;
 public class SurefireParser extends Parser {
 
 	@Override
-	public void parse() {
+	public boolean parse() {
 		values = new int[3];
 		ModuleTraverser mt = new ModuleTraverser();
 		mt.findAllModules(Data.project);
@@ -35,6 +35,7 @@ public class SurefireParser extends Parser {
 		values[2] = tmp[0] - tmp[1]; // success
 
 		CiGraph.log(" -- results SurefireParser: " + values[0] + "  " + values[1] + "  " + values[2]);
+		return true;
 	}
 
 	private void parseModule(File path) {

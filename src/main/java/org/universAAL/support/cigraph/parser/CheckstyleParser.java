@@ -12,6 +12,7 @@ public class CheckstyleParser extends XMLParser {
 		fXmlFile = new File("target", "checkstyle-result.xml");
 	}
 
+	@Override
 	protected void parse(Document doc) {
 		values = new int[3];
 

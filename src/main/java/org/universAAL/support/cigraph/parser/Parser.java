@@ -8,5 +8,5 @@ public abstract class Parser {
 		return values;
 	}
 	
-	public abstract void parse();
+	public abstract boolean parse();
 }

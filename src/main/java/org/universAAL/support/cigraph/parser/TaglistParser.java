@@ -12,6 +12,7 @@ public class TaglistParser extends XMLParser {
 		fXmlFile = new File(new File("target", "taglist"), "taglist.xml");
 	}
 
+	@Override
 	protected void parse(Document doc) {
 		values = new int[1];
 

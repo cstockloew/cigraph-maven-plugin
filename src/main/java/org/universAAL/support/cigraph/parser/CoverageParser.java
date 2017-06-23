@@ -14,6 +14,7 @@ public class CoverageParser extends XMLParser {
 		fXmlFile = new File(new File(new File("target", "site"), "cobertura"), "coverage.xml");
 	}
 
+	@Override
 	protected void parse(Document doc) {
 		values = new int[1];
 

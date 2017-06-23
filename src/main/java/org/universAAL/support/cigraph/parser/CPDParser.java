@@ -12,6 +12,7 @@ public class CPDParser extends XMLParser {
 		fXmlFile = new File("target", "cpd.xml");
 	}
 
+	@Override
 	protected void parse(Document doc) {
 		values = new int[1];
 
